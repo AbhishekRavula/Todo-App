@@ -95,7 +95,7 @@ router.post("/reset", (req: Request, res: Response) => {
       completed: true,
     },
   ];
-  return res.status(200).end();
+  return res.status(200).json(todosList);
 });
 
 export default router;
