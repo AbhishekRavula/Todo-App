@@ -13,6 +13,7 @@ export const TodoInput = ({
 
   const handleAddTodo = (e: any) => {
     e.preventDefault();
+    setTodoName("");
     onAddTodo(todoName);
   };
 

@@ -14,7 +14,7 @@ describe("Todo App", () => {
   });
 
   it("it should add new todo item", async () => {
-    const newTodoItem = await AddAndGetNewTodoItem("Drink Water");
+    const newTodoItem = await AddAndGetNewTodoItem("Wake up at 6");
     expect(newTodoItem).toBeInTheDocument();
   });
 
