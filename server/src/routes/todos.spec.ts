@@ -1,8 +1,22 @@
 import request from "supertest";
 import app from "../app";
+import * as todos from "./todos";
 
-beforeEach(async () => {
-  await request(app).post("/todos/reset");
+beforeEach(() => {
+  Object.defineProperty(todos, "todosList", {
+    value: [
+      {
+        id: "1",
+        name: "Build TDD demo app",
+        completed: false,
+      },
+      {
+        id: "2",
+        name: "Drint Water",
+        completed: true,
+      },
+    ],
+  });
 });
 
 describe("Todos API", () => {

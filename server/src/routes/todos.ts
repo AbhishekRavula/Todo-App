@@ -8,7 +8,18 @@ interface ITodoItem {
   completed: boolean;
 }
 
-let todosList: Array<ITodoItem> = [];
+export let todosList: Array<ITodoItem> = [
+  {
+    id: "1",
+    name: "Build TDD demo app",
+    completed: false,
+  },
+  {
+    id: "2",
+    name: "Drink Water",
+    completed: true,
+  },
+];
 
 // getting todo items
 router.get("/", (req: Request, res: Response) => {
@@ -78,23 +89,6 @@ router.delete("/:id", (req: Request, res: Response) => {
 
   todosList.splice(todoItemIndex, 1);
 
-  return res.status(200).json(todosList);
-});
-
-// reseting todo items
-router.post("/reset", (req: Request, res: Response) => {
-  todosList = [
-    {
-      id: "1",
-      name: "Build TDD demo app",
-      completed: false,
-    },
-    {
-      id: "2",
-      name: "Drint Water",
-      completed: true,
-    },
-  ];
   return res.status(200).json(todosList);
 });
 
