@@ -61,18 +61,23 @@ export const TodoItem = ({
   return (
     <div className="todo-item-container">
       <li>{todoItem.name}</li>
-      <button onClick={onEdit} data-testid={"edit-todo-item" + todoItem.name}>
-        edit
-      </button>
       {todoItem.completed ? (
         <div data-testid={"completed-todo-item" + todoItem.name}>completed</div>
       ) : (
-        <button
-          onClick={handleMarkComplete}
-          data-testid={"mark-complete-todo-item" + todoItem.name}
-        >
-          mark as complete
-        </button>
+        <>
+          <button
+            onClick={onEdit}
+            data-testid={"edit-todo-item" + todoItem.name}
+          >
+            edit
+          </button>
+          <button
+            onClick={handleMarkComplete}
+            data-testid={"mark-complete-todo-item" + todoItem.name}
+          >
+            mark as complete
+          </button>
+        </>
       )}
       <button
         data-testid={"delete-todo-item" + todoItem.name}

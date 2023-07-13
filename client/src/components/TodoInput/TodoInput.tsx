@@ -29,6 +29,7 @@ export const TodoInput = ({
         type="submit"
         onClick={handleAddTodo}
         data-testid="add-new-item-button"
+        disabled={todoName.length === 0}
       >
         Add
       </button>
