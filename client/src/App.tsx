@@ -6,6 +6,7 @@ import { cloneDeep } from "lodash";
 
 function App() {
   const [todoList, setTodoList] = useState<Array<ITodoItem>>([]);
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     getTodos();
@@ -13,7 +14,7 @@ function App() {
 
   async function getTodos() {
     try {
-      const res = await fetch("http://localhost:5005/todos");
+      const res = await fetch(`${apiUrl}/todos`);
       const todoList = await res.json();
       setTodoList(todoList);
     } catch (error) {
@@ -23,7 +24,7 @@ function App() {
 
   const onAddTodo = async (newTodoName: string) => {
     try {
-      const res = await fetch("http://localhost:5005/todos", {
+      const res = await fetch(`${apiUrl}/todos`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: newTodoName }),
@@ -37,14 +38,11 @@ function App() {
 
   const onUpdateTodo = async (toUpdateTodoItem: ITodoItem) => {
     try {
-      const res = await fetch(
-        `http://localhost:5005/todos/${toUpdateTodoItem.id}`,
-        {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(toUpdateTodoItem),
-        }
-      );
+      const res = await fetch(`${apiUrl}/todos/${toUpdateTodoItem.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(toUpdateTodoItem),
+      });
       const updatedTodoItem = (await res.json()) as ITodoItem;
 
       const updatedTodosList = cloneDeep(todoList);
@@ -66,7 +64,7 @@ function App() {
 
   const onDeleteTodo = async (todoItemId: String) => {
     try {
-      const res = await fetch(`http://localhost:5005/todos/${todoItemId}`, {
+      const res = await fetch(`${apiUrl}/todos/${todoItemId}`, {
         method: "DELETE",
       });
       const updatedTodList = (await res.json()) as ITodoItem[];

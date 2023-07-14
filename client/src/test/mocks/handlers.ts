@@ -1,7 +1,9 @@
 import { rest } from "msw";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export const handlers = [
-  rest.get("http://localhost:5005/todos", (req, res, ctx) => {
+  rest.get(`${apiUrl}/todos`, (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json([
@@ -18,7 +20,7 @@ export const handlers = [
       ])
     );
   }),
-  rest.post("http://localhost:5005/todos", async (req, res, ctx) => {
+  rest.post(`${apiUrl}/todos`, async (req, res, ctx) => {
     const reqBody = await req.json();
     return res(
       ctx.status(200),
@@ -30,12 +32,12 @@ export const handlers = [
     );
   }),
 
-  rest.patch("http://localhost:5005/todos/:id", async (req, res, ctx) => {
+  rest.patch(`${apiUrl}/todos/:id`, async (req, res, ctx) => {
     const newTodoItem = await req.json();
     return res(ctx.status(200), ctx.json(newTodoItem));
   }),
 
-  rest.delete("http://localhost:5005/todos/:id", async (req, res, ctx) => {
+  rest.delete(`${apiUrl}/todos/:id`, async (req, res, ctx) => {
     return res(ctx.status(200), ctx.json([]));
   }),
 ];
