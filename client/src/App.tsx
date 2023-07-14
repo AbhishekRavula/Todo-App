@@ -8,10 +8,10 @@ function App() {
   const [todoList, setTodoList] = useState<Array<ITodoItem>>([]);
 
   useEffect(() => {
-    fetchTodos();
+    getTodos();
   }, []);
 
-  async function fetchTodos() {
+  async function getTodos() {
     try {
       const res = await fetch("http://localhost:5005/todos");
       const todoList = await res.json();
