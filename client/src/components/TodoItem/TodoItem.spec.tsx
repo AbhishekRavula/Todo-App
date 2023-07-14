@@ -202,7 +202,6 @@ describe("Todo Item", () => {
     const itemEditButton = screen.queryByTestId(
       "edit-todo-item" + "Charge phone"
     );
-    console.log("itemEditButton:", itemEditButton);
     const itemDeleteButton = screen.queryByTestId(
       "delete-todo-item" + "Charge phone"
     );
