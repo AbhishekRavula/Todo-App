@@ -7,7 +7,8 @@
     "build": "tsc --project tsconfig.build.json",
     "start": "node dist/server.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\"",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "coverage": "jest --watchAll --coverage"
   },
   "keywords": [],
   "author": "",
