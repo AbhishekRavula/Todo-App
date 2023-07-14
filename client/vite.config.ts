@@ -12,5 +12,9 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "./src/test/setup.ts",
     css: true,
+    coverage: {
+      provider: "v8",
+      reportsDirectory: "./src/test/coverage",
+    },
   },
 });
