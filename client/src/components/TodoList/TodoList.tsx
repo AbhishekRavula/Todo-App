@@ -12,7 +12,7 @@ export const TodoList = ({
 }) => {
   if (todos && todos.length) {
     return (
-      <ol>
+      <ol style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
         {todos.map((todo) => {
           return (
             <TodoItem

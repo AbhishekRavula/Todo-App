@@ -18,7 +18,11 @@ export const TodoInput = ({
   };
 
   return (
-    <form role="form" onSubmit={handleAddTodo}>
+    <form
+      role="form"
+      onSubmit={handleAddTodo}
+      style={{ display: "flex", gap: "1rem", justifyContent: "center" }}
+    >
       <input
         type="text"
         value={todoName}
@@ -30,6 +34,7 @@ export const TodoInput = ({
         onClick={handleAddTodo}
         data-testid="add-new-item-button"
         disabled={todoName.length === 0}
+        style={{ backgroundColor: "blue" }}
       >
         Add
       </button>

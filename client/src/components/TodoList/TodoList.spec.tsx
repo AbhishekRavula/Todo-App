@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { TodoList } from "./TodoList";
 
 describe("Todo List", () => {
-  it("it should render todo items", async () => {
+  it("should render todo items", async () => {
     const todoList = [
       {
         id: "1",
@@ -28,7 +28,7 @@ describe("Todo List", () => {
     }
   });
 
-  it("it should render empty help text when todo list is empty", async () => {
+  it("should render empty help text when todo list is empty", async () => {
     render(<TodoList todos={[]} onDelete={() => {}} onUpdate={() => {}} />);
     const helpTextElement = screen.getByText("No Tasks Yet. Add Some!");
     expect(helpTextElement).toBeInTheDocument();

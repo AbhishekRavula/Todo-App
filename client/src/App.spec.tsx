@@ -14,7 +14,7 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 describe("Todo App", () => {
-  it("it should render todo list", async () => {
+  it("should render todo list", async () => {
     render(<App />);
     const todoList = await screen.findByRole("list");
     const todoListItems = await screen.findAllByRole("listitem");
@@ -24,12 +24,12 @@ describe("Todo App", () => {
     }
   });
 
-  it("it should add new todo item", async () => {
+  it("should add new todo item", async () => {
     const newTodoItem = await AddAndGetNewTodoItem("Wake up at 6");
     expect(newTodoItem).toBeInTheDocument();
   });
 
-  it("it should update todo item", async () => {
+  it("should update todo item", async () => {
     const newTodoItem = await AddAndGetNewTodoItem("Eat");
     expect(newTodoItem).toBeInTheDocument();
 
@@ -50,7 +50,7 @@ describe("Todo App", () => {
     expect(updatedTodoItem).toBeInTheDocument();
   });
 
-  it("it should mark todo item as completed", async () => {
+  it("should mark todo item as completed", async () => {
     const newTodoItem = await AddAndGetNewTodoItem("Watch movie");
     expect(newTodoItem).toBeInTheDocument();
 
@@ -67,18 +67,18 @@ describe("Todo App", () => {
     expect(todoItemCompleted).toBeInTheDocument();
   });
 
-  it("it should delete todo item", async () => {
+  it("should delete todo item", async () => {
     const newTodoItem = await AddAndGetNewTodoItem("Learn TDD");
     expect(newTodoItem).toBeInTheDocument();
 
-    const todoItemMarkCompleteButton = screen.getByTestId(
+    const todoItemDeleteButton = screen.getByTestId(
       "delete-todo-item" + "Learn TDD"
     );
 
-    fireEvent.click(todoItemMarkCompleteButton);
+    fireEvent.click(todoItemDeleteButton);
 
     await waitFor(() => {
-      expect(todoItemMarkCompleteButton).not.toBeInTheDocument();
+      expect(todoItemDeleteButton).not.toBeInTheDocument();
     });
   });
 });

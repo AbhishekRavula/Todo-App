@@ -11,7 +11,7 @@ interface ITodoItem {
 export let todosList: Array<ITodoItem> = [
   {
     id: "1",
-    name: "Build TDD demo app",
+    name: "Build Todo app",
     completed: false,
   },
   {
