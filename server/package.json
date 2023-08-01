@@ -8,7 +8,8 @@
     "start": "node dist/server.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\"",
     "test": "jest --watchAll",
-    "coverage": "jest --watchAll --coverage"
+    "coverage": "jest --watchAll --coverage",
+    "vercel-build": "echo hello"
   },
   "keywords": [],
   "author": "",
