@@ -76,8 +76,8 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>Todo App</h1>
+    <div className="container">
+      <h1 className="title">Todo App</h1>
       <TodoInput onAddTodo={onAddTodo} />
       <TodoList
         todos={todoList}

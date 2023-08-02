@@ -1,5 +1,11 @@
 import { useState } from "react";
 import { ITodoItem } from "../../types/todo";
+import "./TodoItem.css";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import DoneIcon from "@mui/icons-material/Done";
+import { TodoInput } from "..";
 
 export const TodoItem = ({
   todoItem,
@@ -10,19 +16,13 @@ export const TodoItem = ({
   onUpdate: (updatedTodoItem: ITodoItem) => void;
   onDelete: (todoItemId: String) => void;
 }) => {
-  const [todoItemName, setTodoItemName] = useState(todoItem.name);
   const [isEditing, setIsEditing] = useState(false);
 
   const onEdit = () => {
     setIsEditing(true);
   };
 
-  const onTodoItemNameCange = (e: any) => {
-    setTodoItemName(e.target.value);
-  };
-
-  const handleOnUpdate = (e: any) => {
-    e.preventDefault();
+  const handleOnUpdate = (todoItemName: string) => {
     onUpdate({
       ...todoItem,
       name: todoItemName,
@@ -42,73 +42,40 @@ export const TodoItem = ({
   };
 
   if (isEditing) {
-    return (
-      <form onSubmit={handleOnUpdate} style={{ display: "flex", gap: "1rem" }}>
-        <input
-          type="text"
-          value={todoItemName}
-          onChange={onTodoItemNameCange}
-          data-testid={"edit-item-input" + todoItem.name}
-        />
-        <button
-          type="submit"
-          data-testid={"update-item" + todoItem.name}
-          style={{ backgroundColor: "blue" }}
-        >
-          update
-        </button>
-      </form>
-    );
+    return <TodoInput onAddTodo={handleOnUpdate} todoInput={todoItem.name} />;
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: "1rem",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
-      <div>
+    <div className="todo-item-container">
+      <div className="todo-item-name-and-icon">
+        {todoItem.completed && <CheckCircleOutlineIcon color="success" />}
         <li>{todoItem.name}</li>
       </div>
-      <div style={{ display: "flex", gap: "1rem" }}>
-        {todoItem.completed ? (
-          <div
-            data-testid={"completed-todo-item" + todoItem.name}
-            style={{
-              padding: "0.5rem",
-              backgroundColor: "green",
-              borderRadius: "1rem",
-            }}
-          >
-            completed
-          </div>
-        ) : (
+      <div className="todo-item-actions">
+        {!todoItem.completed && (
           <>
             <button
               onClick={onEdit}
               data-testid={"edit-todo-item" + todoItem.name}
-              style={{ backgroundColor: "blue" }}
+              className="edit-todo-item"
             >
-              edit
+              <EditOutlinedIcon />
             </button>
             <button
               onClick={handleMarkComplete}
               data-testid={"mark-complete-todo-item" + todoItem.name}
-              style={{ backgroundColor: "blue" }}
+              className="mark-complete-todo-item"
             >
-              mark as complete
+              <DoneIcon color="success" />
             </button>
           </>
         )}
         <button
           data-testid={"delete-todo-item" + todoItem.name}
           onClick={handleOnDelete}
-          style={{ backgroundColor: "red" }}
+          className="delete-todo-item"
         >
-          delete
+          <DeleteOutlineIcon />
         </button>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { ITodoItem } from "../../types/todo";
 import { TodoItem } from "../TodoItem";
+import "./TodoList.css";
 
 export const TodoList = ({
   todos,
@@ -12,7 +13,7 @@ export const TodoList = ({
 }) => {
   if (todos && todos.length) {
     return (
-      <ol style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <ul className="todo-list">
         {todos.map((todo) => {
           return (
             <TodoItem
@@ -23,8 +24,8 @@ export const TodoList = ({
             />
           );
         })}
-      </ol>
+      </ul>
     );
   }
-  return <div>No Tasks Yet. Add Some!</div>;
+  return <div className="empty-todo-list">No Todos Yet. Add Some!</div>;
 };
