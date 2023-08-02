@@ -8,18 +8,7 @@ interface ITodoItem {
   completed: boolean;
 }
 
-export let todosList: Array<ITodoItem> = [
-  {
-    id: "1",
-    name: "Build Todo app",
-    completed: false,
-  },
-  {
-    id: "2",
-    name: "Drink Water",
-    completed: true,
-  },
-];
+export let todosList: Array<ITodoItem> = [];
 
 // getting todo items
 router.get("/", (req: Request, res: Response) => {
