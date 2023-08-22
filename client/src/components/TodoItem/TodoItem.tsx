@@ -14,7 +14,7 @@ export const TodoItem = ({
 }: {
   todoItem: ITodoItem;
   onUpdate: (updatedTodoItem: ITodoItem) => void;
-  onDelete: (todoItemId: String) => void;
+  onDelete: (todoItemId: string) => void;
 }) => {
   const [isEditing, setIsEditing] = useState(false);
 
@@ -38,7 +38,7 @@ export const TodoItem = ({
   };
 
   const handleOnDelete = () => {
-    onDelete(todoItem.id);
+    onDelete(todoItem._id);
   };
 
   if (isEditing) {

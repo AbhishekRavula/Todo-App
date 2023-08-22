@@ -1,8 +1,17 @@
 import express from "express";
 import todosRouter from "./routes/todos";
 import cors from "cors";
+import mongoose from 'mongoose';
+import "dotenv/config";
+
 
 const app = express();
+
+mongoose.connect(`mongodb+srv://${process.env.MONGO_DB_USERNAME}:${encodeURIComponent(process.env.MONGO_DB_PASSWORD ?? "")}@cluster0.mbrefad.mongodb.net/todoApp?retryWrites=true&w=majority`)
+  .then(() => console.log('Connected to db!'))
+  .catch((err) => {
+    console.log("Error connecting to db", err.message)
+  })
 
 app.use(cors());
 

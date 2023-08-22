@@ -1,84 +1,73 @@
 import express, { Request, Response } from "express";
+import todoModel from "../models/todoModel";
 
 const router = express.Router();
 
-interface ITodoItem {
-  id: string;
-  name: string;
-  completed: boolean;
-}
-
-export let todosList: Array<ITodoItem> = [];
-
 // getting todo items
-router.get("/", (req: Request, res: Response) => {
-  return res.status(200).json(todosList);
+router.get("/", async (req: Request, res: Response) => {
+  const todos = await todoModel.find()
+  return res.status(200).json(todos);
 });
 
 // getting specific todo item
-router.get("/:id", (req: Request, res: Response) => {
-  const id = req.params.id;
-  const todoItem = todosList.find((todoItem) => todoItem.id === id);
-
-  if (todoItem) {
+router.get("/:id", async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const todoItem = await todoModel.findById(id)
     return res.status(200).json(todoItem);
+  } catch (error) {
+    return res.status(404).end();
   }
-
-  return res.status(404).end();
 });
 
 // creating todo item
-router.post("/", (req: Request, res: Response) => {
+router.post("/", async (req: Request, res: Response) => {
   const newTodoItemName = req.body.name;
   if (!newTodoItemName || typeof newTodoItemName !== "string") {
     return res.status(400).end();
   }
 
   const newTodoItem = {
-    id: todosList.length + 1 + "",
     name: newTodoItemName,
     completed: false,
   };
 
-  todosList.push(newTodoItem);
-
-  return res.json(newTodoItem);
+  const todo = await todoModel.create(newTodoItem);
+  return res.json(todo);
 });
 
 // updating todo item
-router.patch("/:id", (req: Request, res: Response) => {
-  const todoData = req.body;
-  const id = req.params.id;
-  const todoItemIndex = todosList.findIndex((todoItem) => todoItem.id === id);
+router.patch("/:id", async (req: Request, res: Response) => {
+  try {
+    const todoData = req.body;
+    const id = req.params.id;
 
-  if (
-    todoItemIndex === -1 ||
-    (todoData.completed && typeof todoData.completed !== "boolean") ||
-    (todoData.name && typeof todoData.name !== "string")
-  ) {
-    return res.status(400).end();
+    if (
+      (todoData.completed && typeof todoData.completed !== "boolean") ||
+      (todoData.name && typeof todoData.name !== "string")
+    ) {
+      return res.status(400).end();
+    }
+
+    const updatedTodo = await todoModel.findByIdAndUpdate(id, todoData, {
+      "returnDocument": "after"
+    })
+
+    return res.status(200).json(updatedTodo);
+  } catch (error) {
+    return res.status(400).end()
   }
-
-  todosList[todoItemIndex] = {
-    ...todosList[todoItemIndex],
-    ...todoData,
-  };
-
-  return res.status(200).json(todosList[todoItemIndex]);
 });
 
 //deleting todo item
-router.delete("/:id", (req: Request, res: Response) => {
+router.delete("/:id", async (req: Request, res: Response) => {
   const id = req.params.id;
-  const todoItemIndex = todosList.findIndex((todoItem) => todoItem.id === id);
-
-  if (todoItemIndex === -1) {
-    return res.status(400).end();
+  try {
+    await todoModel.findByIdAndDelete(id)
+    return res.status(200).end();
+  } catch (error) {
+    return res.status(400).end()
   }
-
-  todosList.splice(todoItemIndex, 1);
-
-  return res.status(200).json(todosList);
 });
 
 export default router;

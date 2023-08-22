@@ -38,7 +38,7 @@ function App() {
 
   const onUpdateTodo = async (toUpdateTodoItem: ITodoItem) => {
     try {
-      const res = await fetch(`${apiUrl}/todos/${toUpdateTodoItem.id}`, {
+      const res = await fetch(`${apiUrl}/todos/${toUpdateTodoItem._id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(toUpdateTodoItem),
@@ -48,7 +48,7 @@ function App() {
       const updatedTodosList = cloneDeep(todoList);
 
       const todoItemIndex = updatedTodosList.findIndex(
-        (todoItem) => todoItem.id === updatedTodoItem.id
+        (todoItem) => todoItem._id === updatedTodoItem._id
       );
 
       updatedTodosList[todoItemIndex] = {
@@ -62,14 +62,17 @@ function App() {
     }
   };
 
-  const onDeleteTodo = async (todoItemId: String) => {
+  const onDeleteTodo = async (todoItemId: string) => {
     try {
       const res = await fetch(`${apiUrl}/todos/${todoItemId}`, {
         method: "DELETE",
       });
-      const updatedTodList = (await res.json()) as ITodoItem[];
 
-      setTodoList(updatedTodList);
+      if (res.status === 200) {
+        setTodoList(prevTodoList =>
+          prevTodoList.filter(prevList => prevList._id !== todoItemId)
+        );
+      }
     } catch (error) {
       console.log("error", error);
     }

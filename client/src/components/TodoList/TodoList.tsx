@@ -9,15 +9,15 @@ export const TodoList = ({
 }: {
   todos: Array<ITodoItem>;
   onUpdate: (updatedTodoItem: ITodoItem) => void;
-  onDelete: (todoItemId: String) => void;
+  onDelete: (todoItemId: string) => void;
 }) => {
-  if (todos && todos.length) {
+  if (todos?.length) {
     return (
       <ul className="todo-list">
         {todos.map((todo) => {
           return (
             <TodoItem
-              key={todo.id}
+              key={todo._id}
               todoItem={todo}
               onUpdate={onUpdate}
               onDelete={onDelete}
