@@ -5,19 +5,19 @@ describe("Todo List", () => {
   it("should render todo items", async () => {
     const todoList = [
       {
-        id: "1",
+        _id: "1",
         name: "Build TDD demo app",
         completed: false,
       },
       {
-        id: "2",
+        _id: "2",
         name: "Drink Water",
         completed: true,
       },
     ];
 
     render(
-      <TodoList todos={todoList} onDelete={() => {}} onUpdate={() => {}} />
+      <TodoList todos={todoList} onDelete={() => { }} onUpdate={() => { }} />
     );
 
     const todoListEle = await screen.findByRole("list");
@@ -29,7 +29,7 @@ describe("Todo List", () => {
   });
 
   it("should render empty help text when todo list is empty", async () => {
-    render(<TodoList todos={[]} onDelete={() => {}} onUpdate={() => {}} />);
+    render(<TodoList todos={[]} onDelete={() => { }} onUpdate={() => { }} />);
     const helpTextElement = screen.getByText("No Tasks Yet. Add Some!");
     expect(helpTextElement).toBeInTheDocument();
   });

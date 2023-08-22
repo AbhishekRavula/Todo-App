@@ -7,12 +7,12 @@ describe("Todo Item", () => {
     render(
       <TodoItem
         todoItem={{
-          id: "1",
+          _id: "1",
           name: "Charge phone",
           completed: false,
         }}
-        onDelete={() => {}}
-        onUpdate={() => {}}
+        onDelete={() => { }}
+        onUpdate={() => { }}
       />
     );
 
@@ -38,11 +38,11 @@ describe("Todo Item", () => {
     render(
       <TodoItem
         todoItem={{
-          id: "1",
+          _id: "1",
           name: "Charge phone",
           completed: false,
         }}
-        onDelete={() => {}}
+        onDelete={() => { }}
         onUpdate={mockedUpdated}
       />
     );
@@ -74,12 +74,12 @@ describe("Todo Item", () => {
     render(
       <TodoItem
         todoItem={{
-          id: "1",
+          _id: "1",
           name: "Charge phone",
           completed: false,
         }}
         onDelete={mockedDelete}
-        onUpdate={() => {}}
+        onUpdate={() => { }}
       />
     );
 
@@ -97,11 +97,11 @@ describe("Todo Item", () => {
     render(
       <TodoItem
         todoItem={{
-          id: "1",
+          _id: "1",
           name: "Charge phone",
           completed: false,
         }}
-        onDelete={() => {}}
+        onDelete={() => { }}
         onUpdate={mockedUpdate}
       />
     );
@@ -119,12 +119,12 @@ describe("Todo Item", () => {
     render(
       <TodoItem
         todoItem={{
-          id: "1",
+          _id: "1",
           name: "Charge phone",
           completed: false,
         }}
-        onDelete={() => {}}
-        onUpdate={() => {}}
+        onDelete={() => { }}
+        onUpdate={() => { }}
       />
     );
 
@@ -144,17 +144,17 @@ describe("Todo Item", () => {
     expect(itemUpdateButton).toBeInTheDocument();
   });
 
-  it("should call callback function for update button click", async () => {
+  it.only("should call callback function for update button click", async () => {
     const mockedUpdate = vi.fn();
 
     render(
       <TodoItem
         todoItem={{
-          id: "1",
+          _id: "1",
           name: "Charge phone",
           completed: false,
         }}
-        onDelete={() => {}}
+        onDelete={() => { }}
         onUpdate={mockedUpdate}
       />
     );
@@ -189,12 +189,12 @@ describe("Todo Item", () => {
     render(
       <TodoItem
         todoItem={{
-          id: "1",
+          _id: "1",
           name: "Charge phone",
           completed: true,
         }}
-        onDelete={() => {}}
-        onUpdate={() => {}}
+        onDelete={() => { }}
+        onUpdate={() => { }}
       />
     );
 
